@@ -1,0 +1,60 @@
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches: ['main'] # 如果你的默认分支不是 main，请修改这里
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: 'pages'
+  cancel-in-progress: true
+
+jobs:
+  build:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install dependencies
+        run: |
+          # 如果你的项目文件不在根目录，需要先 cd 到项目目录
+          # cd website
+          npm install
+      - name: Build
+        run: |
+          # 如果你的项目文件不在根目录，需要先 cd 到项目目录
+          # cd website
+          npm ci && CI=false npm run build
+        env:
+          # 如果你的 URL 从根目录开始，则设置为 /，否则设置为你的子目录，如 /website
+          PUBLIC_URL: /
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          # 如果你的项目文件不在根目录，请修改这里为项目的 build 目录，如 './website/build'
+          path: './build'
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
