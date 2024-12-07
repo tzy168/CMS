@@ -1,0 +1,25 @@
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(0deg, #f6b0b0 0%, #ffffff 100%); // 背景颜色
+}
+
+.login-card {
+    width: 500px;
+    padding: 24px;
+    background: hsla(0, 0%, 100%, 0.315);
+
+    .ant-form-item {
+        margin-bottom: 16px;
+
+        .ant-form-item-label > label {
+            font-weight: 500;
+        }
+    }
+
+    .ant-btn-primary {
+        width: 100%;
+    }
+}

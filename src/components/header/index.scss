@@ -1,0 +1,20 @@
+/* global.css 或 index.css */
+.ant-menu-item-selected {
+    color: #b13081 !important; /* 选中项的文字颜色 */
+  }
+  
+  .ant-menu-item-selected::after {
+    border-bottom: 2px solid #b13081 !important; /* 选中项的下划线 */
+  }
+  
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(180deg, #ffe6e6 0%, #ffffff 100%);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // 添加下阴影
+}
