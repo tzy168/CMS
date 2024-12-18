@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import Layout from "../pages/Layout";
+import App from "../pages/Layout";
 import Login from "../pages/Login";
 import AuthRoute from "../components/AuthRoute"// 引入路由守卫，
 import Detail from "../pages/article/detail";
@@ -16,7 +16,7 @@ const User = lazy(() => import("../pages/user"))
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <AuthRoute><Layout /></AuthRoute>,
+        element: <AuthRoute><App /></AuthRoute>,
         children: [
             {
                 path: "/",
